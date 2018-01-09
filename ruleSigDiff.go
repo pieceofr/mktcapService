@@ -47,13 +47,13 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 func (l SigDiffRet) getSigDiffMessage() (neg bool, message string) {
 	message = fmt.Sprintf("ID:%s threadhold:%.2f obsev:%d ", l.ID, l.Threadhold, l.Observations)
 	if l.DiffBtc != 0 {
-		message = fmt.Sprintf("%s BTC(%.2f)", message, l.DiffBtc)
+		message = fmt.Sprintf("%s BTC(%.2f)%s", message, l.DiffBtc, "%")
 	}
 	if l.DiffUsd != 0 {
-		message = fmt.Sprintf("%s USD(%.2f)", message, l.DiffUsd)
+		message = fmt.Sprintf("%s USD(%.2f)%s", message, l.DiffUsd, "%")
 	}
 	if l.DiffHour != 0 {
-		message = fmt.Sprintf("%s 1Hr(%.2f)", message, l.DiffHour)
+		message = fmt.Sprintf("%s 1Hr(%.2f%s", message, l.DiffHour, "%")
 	}
 	if l.DiffBtc < 0 {
 		neg = true
