@@ -30,7 +30,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 	if len(changes) <= 0 {
 		return ""
 	}
-	message := fmt.Sprintf("Siginifcant Change:\n ---- Inc ----\n")
+	message := fmt.Sprintf("Siginifcant Change:\n ---- BTC Inc -> USD Inc -> 1hr Inc ----\n")
 	negMessage := ""
 	for _, val := range changes {
 		neg, msg := val.getSigDiffMessage()
@@ -40,7 +40,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 			message = fmt.Sprintf("%s%s\n", message, msg)
 		}
 	}
-	message = fmt.Sprintf("%s\n%s\n%s", message, "------ Dec ------", negMessage)
+	message = fmt.Sprintf("%s\n%s\n%s", message, "------BTC Dec -> USD Dec -> 1hr Dec------", negMessage)
 	return message
 }
 
@@ -55,8 +55,16 @@ func (l SigDiffRet) getSigDiffMessage() (neg bool, message string) {
 	if l.DiffHour != 0 {
 		message = fmt.Sprintf("%s 1Hr(%.2f%s)", message, l.DiffHour, "%")
 	}
-	if l.DiffBtc < 0 {
+	if l.DiffBtc != 0 && l.DiffBtc < 0 {
 		neg = true
+	} else if l.DiffBtc == 0 { //depend on DiffUsd
+		if l.DiffUsd != 0 && l.DiffUsd < 0 {
+			neg = true
+		}
+	} else if l.DiffBtc == 0 && l.DiffUsd == 0 {
+		if l.DiffHour != 0 && l.DiffHour < 0 {
+			neg = true
+		}
 	}
 	return neg, message
 }
