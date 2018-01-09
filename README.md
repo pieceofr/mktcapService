@@ -7,8 +7,7 @@ mktcapService is a service that get data from coinmarketcap.com then do the foll
 * Save Data to assigned SQLDatabase
   * turn on/off use saveToDB in conf.yml
 * Monitor Data change and notify user according to the rules has been used
-  * turn on/off use quickMonitor  in conf.yml
-
+  * turn on/off use quickMonitor in conf.yml
 
 ## Notification
 
@@ -51,3 +50,5 @@ slack:
   slackChannel: coinmarket
   token: xoxp-166092624144-xxxxxxxxxxxxxxxx-xxxxxxx-xxxxxxxxxxx
 ```
+
+##### tag `coinmarketcap.com` `crypto market`
