@@ -22,6 +22,8 @@ type ServiceConfig struct {
 	SlackChannel          string
 	RuleSigDiffObserv     int
 	RuleSigDiffThreadhold float64
+	MonitorType           string
+	MonitorCoinList       []string
 }
 
 //InitConfig read from file and make a ServiceConfig
@@ -50,7 +52,8 @@ func InitConfig() ServiceConfig {
 		SlackToken:            viper.GetString("slack.token"),
 		SlackChannel:          viper.GetString("slack.slackChannel"),
 		RuleSigDiffObserv:     viper.GetInt("ruleSigDiff.numObervations"),
-		RuleSigDiffThreadhold: viper.GetFloat64("ruleSigDiff.threadholePercnt")}
+		RuleSigDiffThreadhold: viper.GetFloat64("ruleSigDiff.threadholePercnt"),
+		MonitorType:           viper.GetString("quickMonitorService.monitorType"),
+		MonitorCoinList:       viper.GetStringSlice("quickMonitorService.monitorCoinIDs")}
 	return config
-
 }

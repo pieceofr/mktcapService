@@ -51,4 +51,12 @@ slack:
   token: xoxp-166092624144-xxxxxxxxxxxxxxxx-xxxxxxx-xxxxxxxxxxx
 ```
 
+## Coin ID Rank 100
+```
+bitcoin ethereum ripple bitcoin-cash cardano nem litecoin stellar iota tron dash neo monero eos icon qtum bitcoin-gold lisk raiblocks ethereum-classic verge siacoin omisego bytecoin-bcn bitconnect zcash populous stratis bitshares binance-coin dogecoin ardor kucoin-shares status dentacoin steem tether waves vechain dragonchain digibyte dent augur hshare 0x ark komodo veritaseum golem-network-tokens wax basic-attention-token electroneum salt funfair decred kyber-network
+ethos experience-points neblio nexus kin reddcoin medibloc substratum pivx aion factom request-network qash storm power-ledger aelf aeternity bytom monacoin gas nxt rchain cobinhood digitalnote iconomi deepbrain-chain syscoin maidsafecoin byteball enigma-project bitcoindark time-new-bank paccoin chainlink santiment quantstamp tenx zcoin digixdao gamecredits gnosis-gno blockv red-pulse storj
+```
+
+
+
 ##### tag `coinmarketcap.com` `crypto market`

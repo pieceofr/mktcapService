@@ -44,14 +44,16 @@ func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 		idList := make([]string, 0, numrecords) // for store idList to analyzed
 		if firstMon {                           // First time don't wait for srvConf.SaveToDBInterval Time
 			firstMon = false
-
 			monCoins, err := mktcap.TickerNow(0, numrecords, mktcapConf)
 			if err != nil {
 				log.Println(err)
 			}
 			for _, val := range monCoins {
 				AddNewToList(val, coinList)
-				idList = append(idList, val.ID)
+				if srvConfig.MonitorType != "assign" {
+					idList = append(idList, val.ID)
+				}
+
 			}
 			continue
 		}
@@ -62,8 +64,13 @@ func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 				log.Println(err)
 			}
 			for _, val := range monCoins {
-				idList = append(idList, val.ID)
+				if srvConfig.MonitorType != "assign" {
+					idList = append(idList, val.ID)
+				}
 				AddNewToList(val, coinList)
+			}
+			if srvConfig.MonitorType == "assign" {
+				idList = srvConfig.MonitorCoinList
 			}
 			dataChan <- coinList
 			idListChan <- idList

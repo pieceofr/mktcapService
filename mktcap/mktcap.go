@@ -21,9 +21,9 @@ func ChangeVer(config MktcapConfig, ver string) {
 
 //TickerNow get Ticker data
 func TickerNow(start, limit int, config MktcapConfig) ([]MktCapInfo, error) {
-	resp, err := http.Get(getEndPoint(start, limit, config.MktAPITicker, config))
+	resp, err := http.Get(getTickerEndPoint(start, limit, config))
 	if err != nil {
-		glog.Errorln(getEndPoint(start, limit, config.MktAPITicker, config))
+		glog.Errorln(getTickerEndPoint(start, limit, config))
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
@@ -39,11 +39,41 @@ func TickerNow(start, limit int, config MktcapConfig) ([]MktCapInfo, error) {
 	return list, nil
 }
 
+//TickerNowByIDList Only Get the ids list records
+func TickerNowByIDList(ids []string, config MktcapConfig) ([]MktCapInfo, error) {
+	var ret []MktCapInfo
+	for _, val := range ids {
+		resp, err := http.Get(getTickerCoinEndPoint(val, config))
+		if err != nil {
+			glog.Errorln(getTickerCoinEndPoint(val, config))
+		}
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			resp.Body.Close()
+			return []MktCapInfo{}, err
+		}
+		jsondata, err := getRawData(body)
+		if err != nil {
+			resp.Body.Close()
+			return []MktCapInfo{}, err
+		}
+		list := DataToMktCapInfo(jsondata)
+		if len(list) == 1 {
+			ret = append(ret, list[0])
+		}
+		if resp.Body != nil {
+			resp.Body.Close()
+		}
+
+	}
+	return ret, nil
+}
+
 //TickerSave save ticker datat to sql database
 func TickerSave(start, limit int, config MktcapConfig) error {
-	resp, err := http.Get(getEndPoint(start, limit, config.MktAPITicker, config))
+	resp, err := http.Get(getTickerEndPoint(start, limit, config))
 	if err != nil {
-		glog.Errorln(getEndPoint(start, limit, config.MktAPITicker, config))
+		glog.Errorln(getTickerEndPoint(start, limit, config))
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
@@ -80,8 +110,8 @@ func getRawData(data []byte) ([]interface{}, error) {
 }
 
 //consist endpoint for http
-func getEndPoint(start, limit int, apigroup string, config MktcapConfig) string {
-	endpoint := "https://" + config.MktCapEndpoint + "/" + config.MktAPIVer + "/" + apigroup
+func getTickerEndPoint(start, limit int, config MktcapConfig) string {
+	endpoint := "https://" + config.MktCapEndpoint + "/" + config.MktAPIVer + "/" + config.MktAPITicker
 
 	if start > 0 || limit > 0 {
 		if start > 0 && limit > 0 {
@@ -92,5 +122,10 @@ func getEndPoint(start, limit int, apigroup string, config MktcapConfig) string 
 			endpoint = endpoint + "/?limit=" + strconv.Itoa(limit)
 		}
 	}
+	return endpoint
+}
+func getTickerCoinEndPoint(coin string, config MktcapConfig) string {
+	endpoint := "https://" + config.MktCapEndpoint + "/" + config.MktAPIVer + "/" + config.MktAPITicker
+	endpoint = endpoint + "/" + coin
 	return endpoint
 }
