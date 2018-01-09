@@ -13,6 +13,8 @@ type SigDiffRet struct {
 	Name         string
 	Observations int
 	Threadhold   float64
+	BTCPrice     float64
+	USDPrice     float64
 	DiffBtc      float64
 	DiffUsd      float64
 	DiffHour     float64
@@ -45,7 +47,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 }
 
 func (l SigDiffRet) getSigDiffMessage() (neg bool, message string) {
-	message = fmt.Sprintf("ID:%s threadhold:%.2f obsev:%d ", l.ID, l.Threadhold, l.Observations)
+	message = fmt.Sprintf("ID:%s BTC:%.8f USD:%.2f ", l.ID, l.BTCPrice, l.USDPrice)
 	if l.DiffBtc != 0 {
 		message = fmt.Sprintf("%s BTC(%.2f%s)", message, l.DiffBtc, "%")
 	}
@@ -88,7 +90,8 @@ func rLastDiffSig(observations int, threadhold float64, data []CoinMonitor) []Si
 			dnew = val.PeriodData[len(val.PeriodData)-1]
 			dold = val.PeriodData[0]
 		}
-
+		newchange.BTCPrice = dnew.PriceBtc
+		newchange.USDPrice = dnew.PriceUsd
 		newPercent := ((dnew.PriceBtc - dold.PriceBtc) / dold.PriceBtc) * 100
 		if newPercent >= threadhold || newPercent < (0-threadhold) {
 			newchange.DiffBtc = newPercent
