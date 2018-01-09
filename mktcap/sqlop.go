@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/glog"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/golang/glog"
 )
 
 //vm.dyn.pieceofr.click cryptomarket

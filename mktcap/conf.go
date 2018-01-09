@@ -1,7 +1,7 @@
 package mktcap
 
 import (
-	"github.com/glog"
+	"github.com/golang/glog"
 
 	"github.com/viper"
 )

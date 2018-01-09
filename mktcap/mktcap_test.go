@@ -4,7 +4,7 @@ import (
 	//"fmt"
 	"testing"
 
-	"github.com/glog"
+	"github.com/golang/glog"
 )
 
 const sqlurl = ""

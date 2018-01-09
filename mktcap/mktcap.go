@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/glog"
+	"github.com/golang/glog"
 )
 
 //ChangeEndPoint  endpoint format: "api.coinmarketcap.com"

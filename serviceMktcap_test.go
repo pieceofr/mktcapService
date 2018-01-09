@@ -4,7 +4,7 @@ import (
 	"mktcapService/mktcap"
 	"testing"
 
-	"github.com/glog"
+	"github.com/golang/glog"
 )
 
 func TestAddNewCoin(t *testing.T) {

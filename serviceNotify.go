@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/glog"
+	"github.com/golang/glog"
 	"github.com/slack"
 )
 

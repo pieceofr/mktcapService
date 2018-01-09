@@ -50,7 +50,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "price_usd":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -58,7 +58,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "price_btc":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -66,7 +66,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "market_cap_usd":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -74,7 +74,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "available_supply":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -82,7 +82,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "total_supply":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -90,7 +90,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "max_supply":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -98,7 +98,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "last_updated":
 				if val != nil {
-					iv , err := strconv.ParseInt(val.(string), 10, 64)
+					iv, err := strconv.ParseInt(val.(string), 10, 64)
 					if err != nil {
 						break
 					}
@@ -106,7 +106,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "percent_change_1h":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -114,7 +114,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "percent_change_24h":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -122,7 +122,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "percent_change_7d":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}
@@ -130,7 +130,7 @@ func DataToMktCapInfo(f []interface{}) []MktCapInfo {
 				}
 			case "24h_volume_usd":
 				if val != nil {
-					fv , err := strconv.ParseFloat(val.(string),64)
+					fv, err := strconv.ParseFloat(val.(string), 64)
 					if err != nil {
 						break
 					}

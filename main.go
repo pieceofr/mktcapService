@@ -6,7 +6,7 @@ import (
 	"mktcapService/mktcap"
 	"time"
 
-	"github.com/glog"
+	"github.com/golang/glog"
 )
 
 var srvConfig ServiceConfig
