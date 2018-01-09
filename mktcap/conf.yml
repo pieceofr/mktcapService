@@ -1,0 +1,3 @@
+endpoint : "api.coinmarketcap.com"
+ver : "v1"
+tickerapi : "ticker"
