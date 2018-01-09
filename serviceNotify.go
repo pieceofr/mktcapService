@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/golang/glog"
-	"github.com/slack"
+	"github.com/nlopes/slack"
 )
 
 func slackSendService(message <-chan string, stop <-chan bool) {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/golang/glog"
-	"github.com/viper"
+	"github.com/spf13/viper"
 )
 
 //ServiceConfig config struct
