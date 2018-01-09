@@ -8,7 +8,8 @@ mktcapService is a service that get data from coinmarketcap.com then do the foll
   * turn on/off use saveToDB in conf.yml
 * Monitor Data change and notify user according to the rules has been used
   * turn on/off use quickMonitor in conf.yml
-
+  * use monitorType : assign to monitor specific coins by coin ID  in monitorCoinIDs
+  * use  monitorType : top to monitor top monitorLimitRecords rank coins
 ## Notification
 
 * Send Message to Slack and assigned channel according to rule
@@ -27,28 +28,35 @@ Due to the security reason the conf.yml is not git, you should generate conf.yml
 conf.ym in mktcapService folder
 
 ```
----
-database:
+--- 
+database: 
   mktcapdb: cryptomarket
   sqlendpoint: 127.0.0.1
-  sqlpwd: hello123
-  sqluser: hellouser
+  sqlpwd: mypassword
+  sqluser: mysqlusername
   tickertable: mktcap_ticker
-enableService:
+enableService: 
   quickMonitor: true
-  saveToDB: true
-quickMonitorService:
+  saveToDB: false
+quickMonitorService: 
+  monitorCoinIDs: 
+    - btc
+    - ethereum
+    - ripple
+    - bitcoin-cash
   monitorIntervalSec: 120
   monitorLimitRecords: 100
-ruleSigDiff:
+  monitorType: assign
+ruleSigDiff: 
   numObervations: 2
-  threadholePercnt: 1
-saveToDBService:
+  threadholePercnt: 0.01
+saveToDBService: 
   saveToDBLimitRecords: 100
   saveToDBSec: 900
-slack:
-  slackChannel: coinmarket
-  token: xoxp-166092624144-xxxxxxxxxxxxxxxx-xxxxxxx-xxxxxxxxxxx
+slack: 
+  slackChannel: mktnotify
+  token: xoxp-166092624144-xxxxx-xxx
+
 ```
 
 ## Coin ID Rank 100
