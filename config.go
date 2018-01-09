@@ -38,8 +38,8 @@ func InitConfig() ServiceConfig {
 	}
 	config := ServiceConfig{SQLEndpoint: viper.GetString("database.sqlendpoint"),
 		SQLUser:               viper.GetString("database.sqluser"),
-		SQLPwd:                viper.GetString("databse.sqlpwd"),
-		SQLDB:                 viper.GetString("database.sqldb"),
+		SQLPwd:                viper.GetString("database.sqlpwd"),
+		SQLDB:                 viper.GetString("database.mktcapdb"),
 		SQLTickerTable:        viper.GetString("database.tickertable"),
 		QuickMonitor:          viper.GetBool("enableService.quickMonitor"),
 		SaveToDB:              viper.GetBool("enableService.saveToDB"),
@@ -51,7 +51,7 @@ func InitConfig() ServiceConfig {
 		SlackChannel:          viper.GetString("slack.slackChannel"),
 		RuleSigDiffObserv:     viper.GetInt("ruleSigDiff.numObervations"),
 		RuleSigDiffThreadhold: viper.GetFloat64("ruleSigDiff.threadholePercnt")}
-
+	glog.V(3).Infoln(config)
 	return config
 
 }
