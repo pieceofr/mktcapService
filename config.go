@@ -51,7 +51,6 @@ func InitConfig() ServiceConfig {
 		SlackChannel:          viper.GetString("slack.slackChannel"),
 		RuleSigDiffObserv:     viper.GetInt("ruleSigDiff.numObervations"),
 		RuleSigDiffThreadhold: viper.GetFloat64("ruleSigDiff.threadholePercnt")}
-	glog.V(3).Infoln(config)
 	return config
 
 }
