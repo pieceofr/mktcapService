@@ -36,7 +36,7 @@ func GetCoinByID(w http.ResponseWriter, r *http.Request) {
 			coin[0].PercentChange1h, coin[0].PercentChange24h,
 			coin[0].PercentChange7d, time.Unix(coin[0].LastUpdated, 0))
 		fmt.Fprintf(w, msg)
+	} else {
+		fmt.Fprintf(w, "please check data retrieve")
 	}
-	fmt.Fprintf(w, "please check data retrieve")
-
 }
