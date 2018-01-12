@@ -26,7 +26,7 @@ func main() {
 	if srvConfig.SaveToDB {
 		go SaveDBRoutine(stopSave, srvConfig.SaveToDBInterval, srvConfig.SaveToDBLimit)
 	}
-	go apiService(8080)
+	go apiService(srvConfig.ApiPort)
 	<-terminate
 }
 

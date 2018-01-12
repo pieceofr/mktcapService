@@ -24,6 +24,7 @@ type ServiceConfig struct {
 	RuleSigDiffThreadhold float64
 	MonitorType           string
 	MonitorCoinList       []string
+	ApiPort               int
 }
 
 //InitConfig read from file and make a ServiceConfig
@@ -33,6 +34,7 @@ func InitConfig() ServiceConfig {
 	viper.SetConfigType("yaml")
 	viper.SetDefault("enableService.quickMonitor", true)
 	viper.SetDefault("enableService.saveToDB", false)
+	viper.SetDefault("apiServer.port", 8080)
 
 	err := viper.ReadInConfig()
 	if err != nil { // Handle errors reading the config file
@@ -54,6 +56,7 @@ func InitConfig() ServiceConfig {
 		RuleSigDiffObserv:     viper.GetInt("ruleSigDiff.numObervations"),
 		RuleSigDiffThreadhold: viper.GetFloat64("ruleSigDiff.threadholePercnt"),
 		MonitorType:           viper.GetString("quickMonitorService.monitorType"),
-		MonitorCoinList:       viper.GetStringSlice("quickMonitorService.monitorCoinIDs")}
+		MonitorCoinList:       viper.GetStringSlice("quickMonitorService.monitorCoinIDs"),
+		ApiPort:               viper.GetInt("apiServer.port")}
 	return config
 }
