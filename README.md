@@ -10,6 +10,17 @@ mktcapService is a service that get data from coinmarketcap.com then do the foll
   * turn on/off use quickMonitor in conf.yml
   * use monitorType : assign to monitor specific coins by coin ID  in monitorCoinIDs
   * use  monitorType : top to monitor top monitorLimitRecords rank coins
+* Get Specific coin info
+  * user apiServer.port in conf.yml to change listen port
+
+
+## Api
+
++ get coin info by coin id
+```http://127.0.0.1:8080/coin/bitcoin-cash```
+```Bitcoin Cash (btc:0.18842700)(usd:2624.03) (1hChg:0.91)(24hrChg:-0.25)(7dayChg:3.99)(lastupdate:2018-01-12 10:39:12 -0500 EST)```
+
+
 ## Notification
 
 * Send Message to Slack and assigned channel according to rule
@@ -31,9 +42,9 @@ conf.ym in mktcapService folder
 --- 
 database: 
   mktcapdb: cryptomarket
-  sqlendpoint: 127.0.0.1
-  sqlpwd: mypassword
-  sqluser: mysqlusername
+  sqlendpoint: vm.dyn.pieceofr.click
+  sqlpwd: pieceofr123
+  sqluser: pieceofr
   tickertable: mktcap_ticker
 enableService: 
   quickMonitor: true
@@ -43,7 +54,6 @@ quickMonitorService:
     - btc
     - ethereum
     - ripple
-    - bitcoin-cash
   monitorIntervalSec: 120
   monitorLimitRecords: 100
   monitorType: assign
@@ -55,7 +65,10 @@ saveToDBService:
   saveToDBSec: 900
 slack: 
   slackChannel: mktnotify
-  token: xoxp-166092624144-xxxxx-xxx
+  token:  xoxp-166092624144-1xxxxxxxxxxx
+apiServer:
+  port: 8080
+
 
 ```
 
