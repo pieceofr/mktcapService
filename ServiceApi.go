@@ -29,12 +29,13 @@ func GetCoinByID(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 
 	}
-	msg := ""
 	if len(coin) == 1 {
-		msg = fmt.Sprintf("%s (btc:%.8f)(usd:%.2f) (1hChg:%.2f)(24hrChg:%.2f)(7dayChg:%.2f)(lastupdate:%s)",
+		msg := fmt.Sprintf("%s (btc:%.8f)(usd:%.2f) (1hChg:%.2f)(24hrChg:%.2f)(7dayChg:%.2f)(lastupdate:%s)",
 			coin[0].Name, coin[0].PriceBtc, coin[0].PriceUsd,
 			coin[0].PercentChange1h, coin[0].PercentChange24h,
 			coin[0].PercentChange7d, time.Unix(coin[0].LastUpdated, 0))
+		fmt.Fprintf(w, msg)
 	}
-	fmt.Fprintf(w, msg)
+	fmt.Fprintf(w, "please check data retrieve")
+
 }
