@@ -15,7 +15,7 @@ func apiService(port int) {
 	apiPort := ":" + strconv.Itoa(port)
 	router := mux.NewRouter()
 	router.HandleFunc("/coin/{id}", GetCoinByID).Methods("GET")
-	glog.Infoln("apiService is going to started!")
+	glog.Infoln("apiService is going to start at port!", port)
 	glog.Errorln(http.ListenAndServe(apiPort, router))
 }
 
