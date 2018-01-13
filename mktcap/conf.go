@@ -6,16 +6,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-/*
-var mktCapEndpoint = "api.coinmarketcap.com"
-var mktApiVer = "v1"
-var mktApiTicker = "ticker"
-var sqlurl = "vm.dyn.pieceofr.click"
-var sqluser = "pieceofr"
-var sqlpwd = "pieceofr123"
-var sqldb = "cryptomarket"
-var sqlTickerTable = "mktcap_ticker"
-*/
 //APIEndPoint coinmarketcap.com api endpoint
 const APIEndPoint = "api.coinmarketcap.com"
 
