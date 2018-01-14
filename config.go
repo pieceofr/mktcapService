@@ -16,6 +16,7 @@ type ServiceConfig struct {
 	SQLTickerTable       string
 	QuickMonitor         bool
 	SaveToDB             bool
+	APIService           bool
 	QuickMonitorInterval int
 	QuickMonitorLimit    int
 	SaveToDBInterval     int
@@ -50,6 +51,7 @@ func InitConfig() ServiceConfig {
 		SQLTickerTable:       viper.GetString("database.tickertable"),
 		QuickMonitor:         viper.GetBool("enableService.quickMonitor"),
 		SaveToDB:             viper.GetBool("enableService.saveToDB"),
+		APIService:           viper.GetBool("enableService.apiService"),
 		QuickMonitorInterval: viper.GetInt("quickMonitorService.monitorIntervalSec"),
 		QuickMonitorLimit:    viper.GetInt("quickMonitorService.monitorLimitRecords"),
 		SaveToDBInterval:     viper.GetInt("saveToDBService.saveToDBSec"),
@@ -74,6 +76,5 @@ func InitConfig() ServiceConfig {
 		conds = append(conds, cond)
 	}
 	config.SigDiffConditions = conds
-	//glog.V(3).Infoln("****", config.SigDiffConditions[0].Threadhold)
 	return config
 }

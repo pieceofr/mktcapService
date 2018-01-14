@@ -26,7 +26,10 @@ func main() {
 	if srvConfig.SaveToDB {
 		go SaveDBRoutine(stopSave, srvConfig.SaveToDBInterval, srvConfig.SaveToDBLimit)
 	}
-	go apiService(srvConfig.ApiPort)
+	if srvConfig.APIService {
+		go apiService(srvConfig.ApiPort)
+	}
+
 	<-terminate
 }
 
@@ -63,6 +66,7 @@ func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 			monCoins, err := mktcap.TickerNow(0, numrecords, mktcapConf)
 			if err != nil {
 				log.Println(err)
+				continue
 			}
 			for _, val := range monCoins {
 				if srvConfig.MonitorType != "assign" {
