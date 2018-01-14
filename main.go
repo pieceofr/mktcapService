@@ -65,7 +65,7 @@ func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 		case <-ticker.C:
 			monCoins, err := mktcap.TickerNow(0, numrecords, mktcapConf)
 			if err != nil {
-				log.Println(err)
+				glog.Errorln(err)
 				continue
 			}
 			for _, val := range monCoins {

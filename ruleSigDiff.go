@@ -36,7 +36,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 	if len(changes) <= 0 {
 		return ""
 	}
-	message := fmt.Sprintf("SigDiff Report \n --- INC: thrhold:%.2f obvs:%d ---\n", changes[0].Threadhold, changes[0].Observations)
+	message := fmt.Sprintf("SigDiff Report \n ->> INC: thrhold:%.2f obvs:%d ->> \n", changes[0].Threadhold, changes[0].Observations)
 	negMessage := ""
 	for _, val := range changes {
 		neg, msg := val.getSigDiffMessage()
@@ -46,7 +46,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 			message = fmt.Sprintf("%s%s\n", message, msg)
 		}
 	}
-	message = fmt.Sprintf("%s\n--- DEC: thrhold:%.2f obvs:%d ---\n%s", message, changes[0].Threadhold, changes[0].Observations, negMessage)
+	message = fmt.Sprintf("%s\n <<- DEC: thrhold:%.2f obvs:%d <<-\n%s", message, changes[0].Threadhold, changes[0].Observations, negMessage)
 	return message
 }
 
