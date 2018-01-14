@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"mktcapService/mktcap"
 	"time"
+
+	"github.com/golang/glog"
 )
 
 //NumOfRecs :number of records to be stored in CoinMonitor Struct
-const NumOfRecs = 100
+const NumOfRecs = 2000
 
 //EstimateListCoins : number of estimated coins in coinMonitor, this is used for pre-allocate coin
-const EstimateListCoins = 100
+const EstimateListCoins = 200
 
 var coinMonitorList map[string]CoinMonitor
 
@@ -83,8 +85,14 @@ func (c *CoinMonitor) NewData(data mktcap.MktCapInfo) {
 	c.LastedUpadte = data.LastUpdated
 	if len(c.PeriodData) < NumOfRecs {
 		c.PeriodData = append(c.PeriodData, data)
-	} else {
-		c.PeriodData = append(c.PeriodData[1:len(c.PeriodData)], data)
+	} else { // Greater than NumOfRecs keep 10% of data of data and add new
+		keep := int(NumOfRecs * 0.1)
+		if len(c.PeriodData)-keep > 0 {
+			c.PeriodData = append(c.PeriodData[(len(c.PeriodData)-keep):len(c.PeriodData)], data)
+		} else {
+			c.PeriodData = append(c.PeriodData[0:len(c.PeriodData)], data)
+			glog.V(3).Info("Clean storage of coinMonitor. new array size:", len(c.PeriodData))
+		}
 	}
 }
 
