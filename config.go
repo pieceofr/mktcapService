@@ -52,7 +52,7 @@ func InitConfig() ServiceConfig {
 		QuickMonitor:         viper.GetBool("enableService.quickMonitor"),
 		SaveToDB:             viper.GetBool("enableService.saveToDB"),
 		APIService:           viper.GetBool("enableService.apiService"),
-		QuickMonitorInterval: viper.GetInt("quickMonitorService.monitorIntervalSec"),
+		QuickMonitorInterval: viper.GetInt("quickMonitorService.monitorIntervalMin"),
 		QuickMonitorLimit:    viper.GetInt("quickMonitorService.monitorLimitRecords"),
 		SaveToDBInterval:     viper.GetInt("saveToDBService.saveToDBSec"),
 		SaveToDBLimit:        viper.GetInt("saveToDBService.saveToDBLimitRecords"),

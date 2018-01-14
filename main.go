@@ -33,11 +33,11 @@ func main() {
 	<-terminate
 }
 
-/*MonitorCoinListService : monitoring coin list in every srvConfig.QuickMonitorInterval sec*/
+/*MonitorCoinListService : monitoring coin list in every srvConfig.QuickMonitorInterval Minutes*/
 func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 	glog.Info("MonitorCoinListService has started!")
 	firstMon := true
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
+	ticker := time.NewTicker(time.Duration(interval) * time.Minute)
 	defer ticker.Stop()
 	coinList := InitMonitorList()
 	dataChan := make(chan map[string]CoinMonitor)
