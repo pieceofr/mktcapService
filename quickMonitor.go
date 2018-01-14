@@ -7,10 +7,10 @@ import (
 )
 
 //NumOfRecs :number of records to be stored in CoinMonitor Struct
-const NumOfRecs = 5
+const NumOfRecs = 100
 
 //EstimateListCoins : number of estimated coins in coinMonitor, this is used for pre-allocate coin
-const EstimateListCoins = 10
+const EstimateListCoins = 100
 
 var coinMonitorList map[string]CoinMonitor
 
