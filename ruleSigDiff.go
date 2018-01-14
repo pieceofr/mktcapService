@@ -46,7 +46,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 			message = fmt.Sprintf("%s%s\n", message, msg)
 		}
 	}
-	message = fmt.Sprintf("%s\n--- DEC: thrhold:%.2f obvs:%d ---\n%s", message, changes[0].Threadhold, changes[0].Observations, negMessage)
+	message = fmt.Sprintf("\n--- DEC: thrhold:%.2f obvs:%d ---\n%s", changes[0].Threadhold, changes[0].Observations, negMessage)
 	return message
 }
 
