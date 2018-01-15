@@ -81,6 +81,15 @@ func rLastDiffSig(observations int, threadhold float64, data []CoinMonitor) []Si
 		newchange.Threadhold = threadhold
 		dnew := mktcap.MktCapInfo{}
 		dold := mktcap.MktCapInfo{}
+		if len(val.PeriodData) >= 2 { //if no change from last data
+			dnew = val.PeriodData[len(val.PeriodData)-1]
+			dold = val.PeriodData[len(val.PeriodData)-2]
+			if dnew.PriceBtc == dold.PriceUsd && dnew.PriceUsd == dold.PriceUsd &&
+				dnew.PercentChange1h == dold.PercentChange1h {
+				continue // do not process below and go back to loop top
+			}
+		}
+
 		if len(val.PeriodData) <= 1 {
 			return ret
 		} else if len(val.PeriodData) > 1 && len(val.PeriodData) >= observations {
