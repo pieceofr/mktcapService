@@ -5,7 +5,11 @@ import (
 	"mktcapService/mktcap"
 )
 
-const estimateNumOfCoin = 100
+//SigDiffCond condition used in Sigdiff caculation
+type SigDiffCond struct {
+	Threadhold   float64
+	Observations int
+}
 
 /*SigDiffRet Use For pLastChangeDiff return*/
 type SigDiffRet struct {
@@ -32,7 +36,7 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 	if len(changes) <= 0 {
 		return ""
 	}
-	message := fmt.Sprintf("Siginifcant Change:\n ---- BTC Inc -> USD Inc -> 1hr Inc ----\n")
+	message := fmt.Sprintf("SigDiff Report \n ->> INC: thrhold:%.2f obvs:%d ->> \n", changes[0].Threadhold, changes[0].Observations)
 	negMessage := ""
 	for _, val := range changes {
 		neg, msg := val.getSigDiffMessage()
@@ -42,12 +46,12 @@ func getAllSigDiffMessage(changes []SigDiffRet) string {
 			message = fmt.Sprintf("%s%s\n", message, msg)
 		}
 	}
-	message = fmt.Sprintf("%s\n%s\n%s", message, "------BTC Dec -> USD Dec -> 1hr Dec------", negMessage)
+	message = fmt.Sprintf("%s\n <<- DEC: thrhold:%.2f obvs:%d <<-\n%s", message, changes[0].Threadhold, changes[0].Observations, negMessage)
 	return message
 }
 
 func (l SigDiffRet) getSigDiffMessage() (neg bool, message string) {
-	message = fmt.Sprintf("ID:%s BTC:%.8f USD:%.2f ", l.ID, l.BTCPrice, l.USDPrice)
+	message = fmt.Sprintf("%s BTC:%.8f USD:%.2f ", l.ID, l.BTCPrice, l.USDPrice)
 	if l.DiffBtc != 0 {
 		message = fmt.Sprintf("%s BTC(%.2f%s)", message, l.DiffBtc, "%")
 	}
@@ -59,14 +63,10 @@ func (l SigDiffRet) getSigDiffMessage() (neg bool, message string) {
 	}
 	if l.DiffBtc != 0 && l.DiffBtc < 0 {
 		neg = true
-	} else if l.DiffBtc == 0 { //depend on DiffUsd
-		if l.DiffUsd != 0 && l.DiffUsd < 0 {
-			neg = true
-		}
-	} else if l.DiffBtc == 0 && l.DiffUsd == 0 {
-		if l.DiffHour != 0 && l.DiffHour < 0 {
-			neg = true
-		}
+	} else if l.DiffBtc == 0 && l.DiffUsd != 0 && l.DiffUsd < 0 { //depend on DiffUsd
+		neg = true
+	} else if l.DiffBtc == 0 && l.DiffUsd == 0 && l.DiffHour != 0 && l.DiffHour < 0 {
+		neg = true
 	}
 	return neg, message
 }

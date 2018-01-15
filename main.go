@@ -26,15 +26,18 @@ func main() {
 	if srvConfig.SaveToDB {
 		go SaveDBRoutine(stopSave, srvConfig.SaveToDBInterval, srvConfig.SaveToDBLimit)
 	}
-	go apiService(srvConfig.ApiPort)
+	if srvConfig.APIService {
+		go apiService(srvConfig.ApiPort)
+	}
+
 	<-terminate
 }
 
-/*MonitorCoinListService : monitoring coin list in every srvConfig.QuickMonitorInterval sec*/
+/*MonitorCoinListService : monitoring coin list in every srvConfig.QuickMonitorInterval Minutes*/
 func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 	glog.Info("MonitorCoinListService has started!")
 	firstMon := true
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
+	ticker := time.NewTicker(time.Duration(interval) * time.Minute)
 	defer ticker.Stop()
 	coinList := InitMonitorList()
 	dataChan := make(chan map[string]CoinMonitor)
@@ -62,7 +65,8 @@ func MonitorCoinListService(stop <-chan int, interval, numrecords int) {
 		case <-ticker.C:
 			monCoins, err := mktcap.TickerNow(0, numrecords, mktcapConf)
 			if err != nil {
-				log.Println(err)
+				glog.Errorln(err)
+				continue
 			}
 			for _, val := range monCoins {
 				if srvConfig.MonitorType != "assign" {

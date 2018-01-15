@@ -58,8 +58,10 @@ quickMonitorService:
   monitorLimitRecords: 100
   monitorType: assign
 ruleSigDiff: 
-  numObervations: 2
-  threadholePercnt: 0.01
+  - numObervations: 2
+    threadholdPercnt: 0.01
+  - numObervations: 10
+    threadholdPercnt: 8
 saveToDBService: 
   saveToDBLimitRecords: 100
   saveToDBSec: 900
