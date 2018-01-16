@@ -42,9 +42,9 @@ conf.ym in mktcapService folder
 --- 
 database: 
   mktcapdb: cryptomarket
-  sqlendpoint: vm.dyn.pieceofr.click
-  sqlpwd: pieceofr123
-  sqluser: pieceofr
+  sqlendpoint: 127.0.0.1
+  sqlpwd: mypassword
+  sqluser: myuser
   tickertable: mktcap_ticker
 enableService: 
   quickMonitor: true
