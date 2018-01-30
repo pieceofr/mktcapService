@@ -24,8 +24,13 @@ func TickerNow(start, limit int, config MktcapConfig) ([]MktCapInfo, error) {
 	resp, err := http.Get(getTickerEndPoint(start, limit, config))
 	if err != nil {
 		glog.Errorln(getTickerEndPoint(start, limit, config))
+		return []MktCapInfo{}, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if resp != nil && resp.Body != nil { //prevent nil make crush
+			resp.Body.Close()
+		}
+	}()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return []MktCapInfo{}, err
