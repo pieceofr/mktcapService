@@ -82,4 +82,4 @@ ethos experience-points neblio nexus kin reddcoin medibloc substratum pivx aion 
 
 
 
-##### tag `coinmarketcap.com` `crypto market`
+##### tag `coinmarketcap.com` `crypto market` `cryptocurrency`
