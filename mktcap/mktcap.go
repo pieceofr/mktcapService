@@ -77,8 +77,10 @@ func TickerNowByIDList(ids []string, config MktcapConfig) ([]MktCapInfo, error) 
 //TickerSave save ticker datat to sql database
 func TickerSave(start, limit int, config MktcapConfig) error {
 	resp, err := http.Get(getTickerEndPoint(start, limit, config))
+
 	if err != nil {
 		glog.Errorln(getTickerEndPoint(start, limit, config))
+		return err
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
