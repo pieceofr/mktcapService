@@ -36,7 +36,7 @@ func insertMultRows(db *sql.DB, table string, records []interface{}) (int, error
 	// 15 items
 	insertStr := "INSERT INTO " + table + " (id, name, symbol, rank, price_usd," +
 		" price_btc, market_cap_usd, available_supply, total_supply, max_supply, last_updated, percent_change_1h," +
-		" percent_change_24h, percent_change_7d, 24h_volume_usd)" +
+		" percent_change_24h, percent_change_7d, volume_usd_24h)" +
 		" VALUES (? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?, ?, ?, ?)"
 
 	stm, err := tx.Prepare(insertStr)
