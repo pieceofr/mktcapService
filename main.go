@@ -90,7 +90,7 @@ SaveDBRoutine : save coin data to db in every interval seconds
 */
 func SaveDBRoutine(stop <-chan int, interval, numrecords int) {
 	glog.Info("SaveDBRoutine has started!")
-	db, err := mktcap.SQLConnect(srvConfig.SQLUser, srvConfig.SQLPwd, srvConfig.SQLEndpoint, srvConfig.SQLTickerTable)
+	db, err := mktcap.SQLConnect(srvConfig.SQLUser, srvConfig.SQLPwd, srvConfig.SQLEndpoint, srvConfig.SQLDB)
 	if err != nil {
 		glog.Errorln(err)
 		return
