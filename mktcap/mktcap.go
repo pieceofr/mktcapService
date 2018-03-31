@@ -1,6 +1,7 @@
 package mktcap
 
 import (
+	"database/sql"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -75,7 +76,7 @@ func TickerNowByIDList(ids []string, config MktcapConfig) ([]MktCapInfo, error) 
 }
 
 //TickerSave save ticker datat to sql database
-func TickerSave(start, limit int, config MktcapConfig) error {
+func TickerSave(db *sql.DB, start, limit int, config MktcapConfig) error {
 	resp, err := http.Get(getTickerEndPoint(start, limit, config))
 
 	if err != nil {
@@ -93,12 +94,7 @@ func TickerSave(start, limit int, config MktcapConfig) error {
 	if err != nil {
 		return err
 	}
-	db, err := SqlConnect(config.Sqluser, config.Sqlpwd, config.Sqlurl, config.Sqldb)
-	defer SqlDisconnect(db)
-	if err != nil {
-		glog.Errorln(err)
-	}
-	_, err = insertMultiple(db, config.sqlTickerTable, jsondata)
+	_, err = insertMultRows(db, config.sqlTickerTable, jsondata)
 	if err != nil {
 		glog.Errorln(err)
 		return err

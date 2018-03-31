@@ -90,6 +90,12 @@ SaveDBRoutine : save coin data to db in every interval seconds
 */
 func SaveDBRoutine(stop <-chan int, interval, numrecords int) {
 	glog.Info("SaveDBRoutine has started!")
+	db, err := mktcap.SQLConnect(srvConfig.SQLUser, srvConfig.SQLPwd, srvConfig.SQLEndpoint, srvConfig.SQLTickerTable)
+	if err != nil {
+		glog.Errorln(err)
+		return
+	}
+	defer mktcap.SQLDisconnect(db)
 	firstsave := true
 	ticker := time.NewTicker(time.Duration(interval) * time.Second)
 	defer ticker.Stop()
@@ -97,7 +103,7 @@ func SaveDBRoutine(stop <-chan int, interval, numrecords int) {
 
 		if firstsave { // First time don't wait for srvConf.SaveToDBInterval Time
 			firstsave = false
-			err := mktcap.TickerSave(0, numrecords, mktcapConf)
+			err := mktcap.TickerSave(db, 0, numrecords, mktcapConf)
 			if err != nil {
 				log.Println(err)
 			}
@@ -106,7 +112,7 @@ func SaveDBRoutine(stop <-chan int, interval, numrecords int) {
 
 		select {
 		case <-ticker.C:
-			err := mktcap.TickerSave(0, numrecords, mktcapConf)
+			err := mktcap.TickerSave(db, 0, numrecords, mktcapConf)
 			if err != nil {
 				log.Println(err)
 			}
